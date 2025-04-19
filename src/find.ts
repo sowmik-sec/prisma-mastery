@@ -10,11 +10,19 @@ const main = async () => {
     where: {
       published: true,
     },
+    select: {
+      title: true,
+    },
   });
   // find unique and find unique or throw error
   const findUnique = await prisma.post.findUniqueOrThrow({
     where: {
       id: 2,
+    },
+    select: {
+      title: true,
+      content: true,
+      authorName: true,
     },
   });
   console.log({ findUnique });
