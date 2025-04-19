@@ -26,7 +26,7 @@ const updates = async () => {
   //   console.log(updateMany);
   const upsertData = await prisma.post.upsert({
     where: {
-      id: 4,
+      id: 1,
     },
     update: {
       authorName: "Fake author",
