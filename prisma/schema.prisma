@@ -16,7 +16,7 @@ model Post {
   author User @relation(fields: [authorId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
+  postCategories PostCategory[] // many-to-many relation
   @@map("posts")
 }
 
@@ -24,15 +24,10 @@ model User {
   id Int @id @default(autoincrement())
   username String @unique
   email String 
-  role UserRole
+  role UserRole @default(user)
   profile Profile? // one-to-one relation
   posts Post[] // one-to-many relation
   @@map("users")
-}
-
-enum UserRole {
-  user
-  admin
 }
 
 model Profile {
@@ -46,5 +41,20 @@ model Profile {
 model Category {
   id Int @id @default(autoincrement())
   name String
+  postCategory PostCategory[] // many-to-many relation
   @@map("categories")
+}
+
+model PostCategory {
+  postId Int
+  post Post @relation(fields: [postId], references: [id])
+  categoryId Int
+  category Category @relation(fields: [categoryId], references: [id])
+  @@id([postId, categoryId])
+  @@map("post_categories")
+}
+
+enum UserRole {
+  user
+  admin
 }
