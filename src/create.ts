@@ -44,8 +44,8 @@ const main = async () => {
   // console.log({ createUser });
   // const createProfile = await prisma.profile.create({
   //   data: {
-  //     bio: "This is my bio",
-  //     userId: 1,
+  //     bio: "This is my bio 2",
+  //     userId: 3,
   //   },
   // });
   // console.log({ createProfile });
@@ -55,21 +55,23 @@ const main = async () => {
   //   },
   // });
   // console.log({ createCategory });
-
   const createPost = await prisma.post.create({
     data: {
-      title: "This is post",
-      content: "This is content of the post",
-      authorId: 1,
+      title: "This is post 5",
+      content: "This is content of the post 5",
+      authorId: 3,
       postCategories: {
-        create: {
-          categoryId: 3,
-          // category: {
-          //   connect: {
-          //     id: 1,
-          //   },
-          // },
-        },
+        create: [
+          {
+            categoryId: 1,
+          },
+          {
+            categoryId: 2,
+          },
+          {
+            categoryId: 3,
+          },
+        ],
       },
     },
     include: {
